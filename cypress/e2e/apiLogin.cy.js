@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-const apiLogin = "http://localhost:8081/login";
+const apiLogin = `${Cypress.env("apiUrl")}/login`;
 context("POST /login", () => {
   it("should login successfully", () => {
     cy.request({
