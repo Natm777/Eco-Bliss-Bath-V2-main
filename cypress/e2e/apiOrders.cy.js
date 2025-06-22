@@ -13,6 +13,7 @@ context("GET /orders sans authentification", () => {
   });
 });
 
+
 let token;
 
 context("GET /orders avec authentification", () => {
@@ -44,6 +45,9 @@ context("GET /orders avec authentification", () => {
     });
   });
 });
+
+
+
 context("GET /orders sans commande", () => {
   it("Devrait retourner 404 et un message explicite s'il n'y a pas de commande en cours", () => {
     const fakeEmail = faker.internet.email();
