@@ -29,7 +29,8 @@ context("PUT /orders/add - Ajouter un produit au pannier", () => {
       expect(response.body)
         .to.have.property("orderLines")
         .and.to.be.an("array");
-      response.body.orderLines.forEach((line) => {
+        
+      response.body.orderLines.forEach((line) => { // Vérifie que chaque ligne de commande a une propriété "quantity"
         expect(line)
           .to.have.property("quantity")
           .and.to.be.a("number")
