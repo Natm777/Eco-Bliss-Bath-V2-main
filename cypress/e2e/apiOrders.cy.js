@@ -39,7 +39,7 @@ context("GET /orders avec authentification", () => {
         //s’il y a un body
       },
     }).then((response) => {
-      // Vos assertions pour votre test
+      // Assertions pour le test
       expect(response.status).to.eq(200);
       expect(response.body).to.have.property("orderLines");
     });
