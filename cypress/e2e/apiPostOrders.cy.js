@@ -64,16 +64,16 @@ context("POST /orders sans commande", () => {
           second: fakePassword,
         },
       },
-    }).then((resRegister) => {
-      expect(resRegister.status).to.eq(200);
+    }).then((response) => {
+      expect(response.status).to.eq(200);
 
       // Étape 2 : login pour obtenir un token valide
       cy.request("POST", apiUrl + "/login", {
         username: fakeEmail,
         password: fakePassword,
-      }).then((resLogin) => {
-        expect(resLogin.status).to.eq(200);
-        const token = resLogin.body.token;
+      }).then((response) => {
+        expect(response.status).to.eq(200);
+        const token = response.body.token;
 
         // Étape 3 : test POST /orders
         cy.request({
