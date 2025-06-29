@@ -1,5 +1,4 @@
 import { faker } from "@faker-js/faker";
-const apiLogin = `${Cypress.env("apiUrl")}/login`;
 const apiUrl = Cypress.env("apiUrl");
 let token;
 
@@ -21,7 +20,7 @@ context("POST /login", () => {
       method: "GET",
       url: apiUrl + "/me",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: "Bearer " + token,
         Accept: "application/json",
       },
 
