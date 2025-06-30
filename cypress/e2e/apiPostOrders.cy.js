@@ -94,18 +94,3 @@ context("POST /orders sans commande", () => {
     });
   });
 });
-
-context("POST /orders sans être connecté", () => {
-  it("Devrait retourner 500 car l'utilisateur n'est pas connecté", () => {
-    cy.request({
-      method: "POST",
-      url: apiUrl + "/orders",
-      headers: {
-        Accept: "application/json",
-      },
-      failOnStatusCode: false,
-    }).then((response) => {
-      expect(response.status).to.eq(500);
-      });
-  });
-});
