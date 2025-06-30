@@ -1,7 +1,8 @@
 import { faker } from "@faker-js/faker";
 const apiUrl = Cypress.env("apiUrl");
 let token;
-context("POST /Crée/Valide la commande en cours", () => {
+
+context("POST /Orders avec commande", () => {
   before(() => {
     cy.request("POST", apiUrl + "/login", {
       username: "test2@test.fr",
@@ -13,7 +14,24 @@ context("POST /Crée/Valide la commande en cours", () => {
     });
   });
 
-  it("Devrait créer une commande avec success", () => {
+  it("Devrait ajouter un produit au panier", () => {
+    // Étape 1 : Ajouter un produit au panier
+    cy.request({
+      method: "PUT",
+      url: apiUrl + "/orders/add",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+      body: {
+        product: 10, // ou un produit connu en stock
+        quantity: 1,
+      },
+    }).then((addResponse) => {
+      expect(addResponse.status).to.eq(200);
+    });
+  });
+
+  it("Devrait créer une commande avec succès", () => {
     cy.request({
       method: "POST",
       url: apiUrl + "/orders",
