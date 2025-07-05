@@ -23,3 +23,19 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("checkAddToCartButtonFromProductIndex", (index) => {
+
+  // Attendre que la liste des produits soit bien affichée
+  cy.get('[data-cy="product"]', { timeout: 10000 }).should('have.length.at.least', index + 1);
+
+  cy.get('[data-cy="product"]')
+    .eq(index)
+    .find('[data-cy="product-link"]') // ← adapte si nécessaire
+    .click();
+
+  cy.get('[data-cy="detail-product-add"]').should("exist");
+
+  cy.go("back");
+  cy.get('[data-cy="product"]', { timeout: 10000 }).should("exist");
+});
