@@ -63,7 +63,7 @@ context("PUT /orders/add - Ajouter un produit au pannier", () => {
           product: productId,
           quantity: stock + 1, // volontairement au-dessus
         },
-        failOnStatusCode: false, // important pour ne pas que Cypress bloque sur l’erreur
+        failOnStatusCode: false, 
       }).then((response) => {
         expect(response.status).to.be.gte(400);
       });

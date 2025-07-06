@@ -75,16 +75,60 @@ describe("Ajout au panier et vérification du stock et vérifie si la quantité 
       }
     );
 
-    // Essayer d'ajouter au panier
-    // Vérifier qu’on n’a pas été redirigé vers le panier
+    cy.intercept("PUT", "/orders/add").as("addToCart");
+
     cy.get('[data-cy="detail-product-add"]').click();
 
-    cy.wait(1000);
+    // Attend que l’appel ait lieu
+    cy.wait("@addToCart");
 
     // Vérifier qu’on n’a pas été redirigé vers le panier
     cy.location("hash").should("not.include", "/cart");
 
     // Et qu'on est bien resté sur une fiche produit
     cy.get('[data-cy="detail-product-stock"]').should("exist");
+  });
+
+  it("ne devrait pas permettre d’ajouter une quantité supérieure au stock", () => {
+    cy.contains('[data-cy="product"]', "Milkyway")
+      .find('[data-cy="product-link"]')
+      .click();
+
+    // 💡 Attendre que la fiche produit soit bien chargée
+    cy.get('[data-cy="detail-product-price"]', { timeout: 10000 }).should(
+      "be.visible"
+    );
+
+    // Extraire dynamiquement le stock
+    cy.get('[data-cy="detail-product-stock"]', { timeout: 10000 })
+      .should(($el) => {
+        const stockText = $el.text().trim();
+        expect(stockText).to.match(/\d+\s*en stock/); // force l’attente du nombre
+      })
+      .invoke("text")
+      .then((text) => {
+        const cleaned = text.trim();
+        const match = cleaned.match(/\d+/);
+        const availableStock = parseInt(match[0], 10);
+        const tooMuch = availableStock + 10; // On ajoute 10 pour être sûr de dépasser le stock
+
+        cy.get('[data-cy="detail-product-quantity"]')
+          .clear() //Vide le champ quantité
+          .type(tooMuch.toString());
+
+        // Interception AVANT le clic
+        cy.intercept("PUT", "/orders/add").as("addToCart");
+
+        cy.get('[data-cy="detail-product-add"]').click();
+
+        // Attend que l’appel ait lieu
+        cy.wait("@addToCart");
+
+        // Vérifier qu’on n’a pas été redirigé vers le panier
+        cy.location("hash").should("not.include", "/cart");
+
+        // Et qu'on est bien resté sur une fiche produit
+        cy.get('[data-cy="detail-product-stock"]').should("exist");
+      });
   });
 });
