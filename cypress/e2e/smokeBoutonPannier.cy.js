@@ -10,9 +10,7 @@ describe("Vérifier présence bouton 'Ajouter au panier' sur plusieurs fiches pr
     cy.url().should("include", "/#/products");
   });
 
-
   it("devrait vérifier le bouton sur les 3 premiers produits", () => {
-
     // Vérifie le bouton des 3 premiers produits
     cy.checkAddToCartButtonFromProductIndex(0);
     cy.checkAddToCartButtonFromProductIndex(1);

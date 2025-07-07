@@ -23,7 +23,7 @@ describe("Vérifier faille XSS", () => {
 
     // Vérifie que **aucune alerte JS** n’a été déclenchée
     cy.on("window:alert", (txt) => {
-      //le text correspond à l'alert dans la ligne 16
+      //le text correspond à l'alert dans la ligne 16 XSS
       throw new Error("Faille XSS détectée via alert: " + txt); // Si cette fonction s'exécute, c'est parce qu'un script malveillant a passé à travers et s'est exécuté, le test doit échouer
     });
   });

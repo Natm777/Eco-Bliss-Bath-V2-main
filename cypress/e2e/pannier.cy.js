@@ -131,4 +131,25 @@ describe("Ajout au panier et vérification du stock et vérifie si la quantité 
         cy.get('[data-cy="detail-product-stock"]').should("exist");
       });
   });
+
+  it("ne devrait pas permettre d’ajouter une quantité négative au panier", () => {
+    cy.contains('[data-cy="product"]', "Mousse de rêve")
+      .find('[data-cy="product-link"]')
+      .click();
+
+    cy.get('[data-cy="detail-product-price"]', { timeout: 10000 }).should(
+      "be.visible"
+    );
+
+    // On tape directement une valeur négative
+    cy.get('[data-cy="detail-product-quantity"]').clear().type("-10");
+
+    cy.get('[data-cy="detail-product-add"]').click();
+
+    //Pas de redirection vers le panier
+    cy.location("hash").should("not.include", "/cart");
+
+    // On reste sur la fiche produit
+    cy.get('[data-cy="detail-product-stock"]').should("exist");
+  });
 });

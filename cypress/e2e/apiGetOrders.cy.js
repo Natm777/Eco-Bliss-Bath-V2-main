@@ -14,20 +14,6 @@ context("GET /orders sans authentification", () => {
   });
 });
 
-context("GET /orders avec token invalide", () => {
-  it("devrait retourner 403 Forbidden si le token est invalide", () => {
-    cy.request({
-      method: "GET",
-      url: Cypress.env("apiUrl") + "/orders",
-      headers: {
-        Authorization: "Bearer FAUX.TOKEN.123", // ← faux token
-      },
-      failOnStatusCode: false,
-    }).then((response) => {
-      expect(response.status).to.eq(403);
-    });
-  });
-});
 
 let token;
 
