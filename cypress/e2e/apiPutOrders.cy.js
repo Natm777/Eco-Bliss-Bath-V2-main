@@ -100,4 +100,24 @@ context("PUT /orders/add - Ajouter un produit au pannier", () => {
       });
     });
   });
+
+  it("ne devrait pas permettre l’ajout d’une quantité négative", () => {
+  const productId = 6; // ou tout autre produit en stock
+
+  cy.request({
+    method: "PUT",
+    url: `${apiUrl}/orders/add`,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: {
+      product: productId,
+      quantity: -3, // valeur volontairement négative
+    },
+    failOnStatusCode: false, // important pour que le test n'échoue pas brutalement
+  }).then((response) => {
+    // On attend une erreur, idéalement 400 
+    expect(response.status).to.be.gte(400);
+  });
+});
 });
