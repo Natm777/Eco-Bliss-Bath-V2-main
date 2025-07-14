@@ -1,4 +1,4 @@
-describe("Ajout au panier et vérification du stock et vérifie si la quantité est 0 ou négative", () => {
+describe("Ajout au panier et vérification du stock", () => {
   let initialStock;
 
   beforeEach(() => {
@@ -58,8 +58,8 @@ describe("Ajout au panier et vérification du stock et vérifie si la quantité 
       });
   });
 
-  it("ne devrait pas ajouter un produit au panier si le stock est épuisé", () => {
-    cy.contains('[data-cy="product"]', "Chuchotements d'été")
+  it("ne devrait pas ajouter un produit au panier si le stock est à 0", () => {
+    cy.contains('[data-cy="product"]', "Extrait de nature")
       .find('[data-cy="product-link"]')
       .click();
 
@@ -89,8 +89,9 @@ describe("Ajout au panier et vérification du stock et vérifie si la quantité 
     cy.get('[data-cy="detail-product-stock"]').should("exist");
   });
 
+
   it("ne devrait pas permettre d’ajouter une quantité supérieure au stock", () => {
-    cy.contains('[data-cy="product"]', "Milkyway")
+    cy.contains('[data-cy="product"]', "Aurore boréale")
       .find('[data-cy="product-link"]')
       .click();
 
@@ -110,7 +111,7 @@ describe("Ajout au panier et vérification du stock et vérifie si la quantité 
         const cleaned = text.trim();
         const match = cleaned.match(/\d+/);
         const availableStock = parseInt(match[0], 10);
-        const tooMuch = availableStock + 10; // On ajoute 10 pour être sûr de dépasser le stock
+        const tooMuch = availableStock + 3; // On ajoute 3 pour être sûr de dépasser le stock
 
         cy.get('[data-cy="detail-product-quantity"]')
           .clear() //Vide le champ quantité

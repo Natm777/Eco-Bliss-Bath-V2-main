@@ -9,7 +9,7 @@ describe('Connexion utilisateur', () => {
   });
 });
 
-describe('Connexion utilisateur sans succès', () => {
+describe('Connexion utilisateur sans succès car identifiants incorrects', () => {
   it('devrait afficher un message d\'erreur', () => {
     cy.visit('/#/login');
     cy.get('[data-cy="login-input-username"]').type('test2@test.fr');

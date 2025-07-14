@@ -21,7 +21,7 @@ context("PUT /orders/add - Ajouter un produit au pannier", () => {
         Authorization: "Bearer " + token,
       },
       body: {
-        product: 6,
+        product: 5, // ID du produit à ajouter
         quantity: 1,
       },
     }).then((response) => {
@@ -81,7 +81,7 @@ context("PUT /orders/add - Ajouter un produit au pannier", () => {
       // S'assure que le stock est raisonnable pour le test
       expect(stock).to.be.a("number");
 
-      const excessiveQuantity = stock + 100;
+      const excessiveQuantity = stock + 3; // On ajoute 3 pour être sûr de dépasser le stock
 
       // Tentative d'ajout au panier avec une quantité excessive
       cy.request({
@@ -102,7 +102,7 @@ context("PUT /orders/add - Ajouter un produit au pannier", () => {
   });
 
   it("ne devrait pas permettre l’ajout d’une quantité négative", () => {
-  const productId = 6; // ou tout autre produit en stock
+  const productId = 9; // ou tout autre produit en stock
 
   cy.request({
     method: "PUT",
@@ -117,7 +117,7 @@ context("PUT /orders/add - Ajouter un produit au pannier", () => {
     failOnStatusCode: false, // important pour que le test n'échoue pas brutalement
   }).then((response) => {
     // On attend une erreur, idéalement 400 
-    expect(response.status).to.be.gte(400);
+    expect(response.status).to.eq(400);
   });
 });
 });
