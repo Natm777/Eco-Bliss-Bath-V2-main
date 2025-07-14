@@ -1,0 +1,104 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-07-14T13:47:43.831Z",
+    "end": "2025-07-14T13:47:44.884Z",
+    "duration": 1053,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "14ce3b1e-4d90-4731-bcc7-26448208a282",
+      "title": "",
+      "fullFile": "cypress\\e2e\\testXss.cy.js",
+      "file": "cypress\\e2e\\testXss.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "867c8965-21b0-4c84-9866-5c42cf415cca",
+          "title": "Vérifier faille XSS",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "ne doit pas exécuter un script injecté dans un commentaire",
+              "fullTitle": "Vérifier faille XSS ne doit pas exécuter un script injecté dans un commentaire",
+              "timedOut": null,
+              "duration": 918,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Injecter une fausse review avec un script\nconst title = \"Test XSS123\";\nconst xssPayload = '<script>alert(\"XSS\")</script>';\ncy.get('[data-cy=\"review-input-rating-images\"] img').eq(3).click();\ncy.get('[data-cy=\"review-input-title\"]').clear().type(title);\ncy.get('[data-cy=\"review-input-comment\"]').clear().type(xssPayload);\ncy.get('[data-cy=\"review-submit\"]').click();\n// Vérifie que **aucune alerte JS** n’a été déclenchée\ncy.on(\"window:alert\", txt => {\n  //le text correspond à l'alert dans la ligne 16 XSS\n  throw new Error(\"Faille XSS détectée via alert: \" + txt); // Si cette fonction s'exécute, c'est parce qu'un script malveillant a passé à travers et s'est exécuté, le test doit échouer\n});",
+              "err": {
+                "message": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:4200/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: connect ECONNREFUSED 127.0.0.1:4200\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n\nBecause this error occurred during a `before all` hook we are skipping the remaining tests in the current suite: `Vérifier faille XSS`",
+                "estack": "CypressError: `cy.visit()` failed trying to load:\n\nhttp://localhost:4200/\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: connect ECONNREFUSED 127.0.0.1:4200\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n\nBecause this error occurred during a `before all` hook we are skipping the remaining tests in the current suite: `Vérifier faille XSS`\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:134686:74)\n    at visitFailedByErr (http://localhost:4200/__cypress/runner/cypress_runner.js:134076:12)\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:134685:11)\n    at tryCatcher (http://localhost:4200/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (http://localhost:4200/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (http://localhost:4200/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromise0 (http://localhost:4200/__cypress/runner/cypress_runner.js:1591:10)\n    at Promise._settlePromises (http://localhost:4200/__cypress/runner/cypress_runner.js:1667:18)\n    at _drainQueueStep (http://localhost:4200/__cypress/runner/cypress_runner.js:2377:12)\n    at _drainQueue (http://localhost:4200/__cypress/runner/cypress_runner.js:2370:9)\n    at Async._drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2386:5)\n    at Async.drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2256:14)\nFrom Your Spec Code:\n    at Context.eval (webpack:///./cypress/e2e/testXss.cy.js:3:7)\n\nFrom Node.js Internals:\n  Error: connect ECONNREFUSED 127.0.0.1:4200\n      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1611:16)",
+                "diff": null
+              },
+              "uuid": "8c995bfa-347f-4226-8682-267c8451e7bb",
+              "parentUUID": "867c8965-21b0-4c84-9866-5c42cf415cca",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "8c995bfa-347f-4226-8682-267c8451e7bb"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 918,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}

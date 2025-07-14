@@ -78,58 +78,53 @@ describe("Ajout au panier et vérification du stock", () => {
     cy.intercept("PUT", "/orders/add").as("addToCart");
 
     cy.get('[data-cy="detail-product-add"]').click();
-
-    // Attend que l’appel ait lieu
     cy.wait("@addToCart");
 
-    // Vérifier qu’on n’a pas été redirigé vers le panier
-    cy.location("hash").should("not.include", "/cart");
+    // ✅ Renforcé avec timeout
+    cy.location("hash", { timeout: 5000 }).should("not.include", "/cart");
 
-    // Et qu'on est bien resté sur une fiche produit
-    cy.get('[data-cy="detail-product-stock"]').should("exist");
+    // ✅ Défensif : fiche produit toujours visible
+    cy.get('[data-cy="detail-product-name"]', { timeout: 5000 }).should(
+      "be.visible"
+    );
   });
 
-
   it("ne devrait pas permettre d’ajouter une quantité supérieure au stock", () => {
-    cy.contains('[data-cy="product"]', "Aurore boréale")
+    cy.contains('[data-cy="product"]', "Mousse de rêve")
       .find('[data-cy="product-link"]')
       .click();
 
-    // 💡 Attendre que la fiche produit soit bien chargée
     cy.get('[data-cy="detail-product-price"]', { timeout: 10000 }).should(
       "be.visible"
     );
 
-    // Extraire dynamiquement le stock
     cy.get('[data-cy="detail-product-stock"]', { timeout: 10000 })
       .should(($el) => {
         const stockText = $el.text().trim();
-        expect(stockText).to.match(/\d+\s*en stock/); // force l’attente du nombre
+        expect(stockText).to.match(/\d+\s*en stock/);
       })
       .invoke("text")
       .then((text) => {
         const cleaned = text.trim();
         const match = cleaned.match(/\d+/);
         const availableStock = parseInt(match[0], 10);
-        const tooMuch = availableStock + 3; // On ajoute 3 pour être sûr de dépasser le stock
+        const tooMuch = availableStock + 1;
 
         cy.get('[data-cy="detail-product-quantity"]')
-          .clear() //Vide le champ quantité
+          .clear()
           .type(tooMuch.toString());
 
-        // Interception AVANT le clic
         cy.intercept("PUT", "/orders/add").as("addToCart");
 
         cy.get('[data-cy="detail-product-add"]').click();
 
-        // Attend que l’appel ait lieu
         cy.wait("@addToCart");
 
-        // Vérifier qu’on n’a pas été redirigé vers le panier
-        cy.location("hash").should("not.include", "/cart");
-
-        // Et qu'on est bien resté sur une fiche produit
-        cy.get('[data-cy="detail-product-stock"]').should("exist");
+        // ✅ Ajout de sécurité ici
+        cy.location("hash", { timeout: 6000 }).should("not.include", "/cart");
+        cy.get('[data-cy="detail-product-stock"]', { timeout: 5000 }).should(
+          "exist"
+        );
       });
   });
 

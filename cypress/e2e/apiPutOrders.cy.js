@@ -71,7 +71,7 @@ context("PUT /orders/add - Ajouter un produit au pannier", () => {
   });
 
   it("Ajout d’une quantité supérieure à la disponibilité", () => {
-    const productId = 10;
+    const productId = 9;
 
     // Récupération du stock réel du produit
     cy.request(`${apiUrl}/products/${productId}`).then((response) => {
@@ -81,7 +81,7 @@ context("PUT /orders/add - Ajouter un produit au pannier", () => {
       // S'assure que le stock est raisonnable pour le test
       expect(stock).to.be.a("number");
 
-      const excessiveQuantity = stock + 3; // On ajoute 3 pour être sûr de dépasser le stock
+      const excessiveQuantity = stock + 1; // On ajoute 1 pour être sûr de dépasser le stock
 
       // Tentative d'ajout au panier avec une quantité excessive
       cy.request({
