@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Mysql
-mysql/git rm --cached -r mysql/
+mysql/
