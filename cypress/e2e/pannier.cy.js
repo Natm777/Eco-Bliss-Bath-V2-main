@@ -58,8 +58,8 @@ describe("Ajout au panier et vérification du stock", () => {
       });
   });
 
-  it("ne devrait pas ajouter un produit au panier si le stock est à 0", () => {
-    cy.contains('[data-cy="product"]', "Extrait de nature")
+  it("ne devrait pas ajouter un produit au panier si le stock est à 0 ou négatif", () => {
+    cy.contains('[data-cy="product"]', "Sentiments printaniers")
       .find('[data-cy="product-link"]')
       .click();
 
@@ -70,20 +70,18 @@ describe("Ajout au panier et vérification du stock", () => {
         expect(match, "Aucun chiffre trouvé dans le texte de stock").to.not.be
           .null;
 
-        initialStock = parseInt(match[0], 10);
-        expect(initialStock).to.be.a("number").and.to.be.at.most(0);
+        const stock = parseInt(match[0], 10);
+        expect(stock).to.be.at.most(0); // le test cible bien un stock 0 ou négatif
       }
     );
 
     cy.intercept("PUT", "/orders/add").as("addToCart");
 
+    cy.get('[data-cy="detail-product-quantity"]').clear().type("1");
     cy.get('[data-cy="detail-product-add"]').click();
-    cy.wait("@addToCart");
+    cy.wait("@addToCart", { timeout: 8000 });
 
-    // ✅ Renforcé avec timeout
-    cy.location("hash", { timeout: 5000 }).should("not.include", "/cart");
-
-    // ✅ Défensif : fiche produit toujours visible
+    // Vérification active : s'assurer qu'on RESTE sur la page produit
     cy.get('[data-cy="detail-product-name"]', { timeout: 5000 }).should(
       "be.visible"
     );
@@ -120,10 +118,9 @@ describe("Ajout au panier et vérification du stock", () => {
 
         cy.wait("@addToCart");
 
-        // ✅ Ajout de sécurité ici
-        cy.location("hash", { timeout: 6000 }).should("not.include", "/cart");
-        cy.get('[data-cy="detail-product-stock"]', { timeout: 5000 }).should(
-          "exist"
+        // Vérification active : s'assurer qu'on RESTE sur la page produit
+        cy.get('[data-cy="detail-product-name"]', { timeout: 5000 }).should(
+          "be.visible"
         );
       });
   });

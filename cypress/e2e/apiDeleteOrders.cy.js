@@ -33,11 +33,8 @@ context("DELETE /orders/{id}/delete - supprimer un produit du panier", () => {
 
       orderLineId = response.body.orderLines[0].id;
       expect(orderLineId).to.be.a("number");
-
-        });
+    });
   });
-
-  
 
   it("Devrait supprimer un produit du panier avec success", () => {
     cy.request({
@@ -47,52 +44,51 @@ context("DELETE /orders/{id}/delete - supprimer un produit du panier", () => {
         Authorization: "Bearer " + token,
         Accept: "application/json",
       },
-        body: {
-            //s’il y a un body
-        },
+      body: {
+        //s’il y a un body
+      },
     }).then((response) => {
       expect(response.status).to.eq(200);
-       if (typeof response.body === "string") {
-            expect(response.body).to.include("Produit supprimé");
-          }
-     });
-  });
-
-  
-});
-
-context("DELETE /orders/{id}/delete - supprimer un produit du panier inexistante", () => {
-  before(() => {
-    cy.request("POST", apiUrl + "/login", {
-      username: "test2@test.fr",
-      password: "testtest",
-    }).then((response) => {
-      expect(response.status).to.eq(200);
-      token = response.body.token;
-      // Stockez le token dans la variable
+      if (typeof response.body === "string") {
+        expect(response.body).to.include("Produit supprimé");
+      }
     });
   });
+});
 
-  
+context(
+  "DELETE /orders/{id}/delete - supprimer un produit du panier inexistante",
+  () => {
+    before(() => {
+      cy.request("POST", apiUrl + "/login", {
+        username: "test2@test.fr",
+        password: "testtest",
+      }).then((response) => {
+        expect(response.status).to.eq(200);
+        token = response.body.token;
+        // Stockez le token dans la variable
+      });
+    });
 
-  it("Devrait envoyer un 404 car produit non trouvé", () => {
-    const fakeOrderLineId = 999999;
-    cy.request({
-      method: "DELETE",
-      url: `${apiUrl}/orders/${fakeOrderLineId}/delete`,
-      headers: {
-        Authorization: "Bearer " + token,
-        Accept: "application/json",
-      },
+    it("Devrait envoyer un 404 car produit non trouvé", () => {
+      const fakeOrderLineId = 999999;
+      cy.request({
+        method: "DELETE",
+        url: `${apiUrl}/orders/${fakeOrderLineId}/delete`,
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/json",
+        },
         body: {
-            //s’il y a un body
+          //s’il y a un body
         },
         failOnStatusCode: false,
-    }).then((response) => {
-      expect(response.status).to.eq(404);
-       if (typeof response.body === "string") {
-            expect(response.body).to.include("Produit non trouvé");
-          }
-     });
-  });
-});
+      }).then((response) => {
+        expect(response.status).to.eq(404);
+        if (typeof response.body === "string") {
+          expect(response.body).to.include("Produit non trouvé");
+        }
+      });
+    });
+  }
+);

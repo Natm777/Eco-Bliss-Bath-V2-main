@@ -7,6 +7,10 @@ L’objectif principal est d’automatiser les tests critiques du **panier** et 
 Pour démarrer cet applicatif web vous devez avoir les outils suivants:
 - Docker
 - NodeJs
+- Angular CLI global 
+
+## Pour installer Angular 
+- npm install -g @angular/cli
 
 ## Installation et démarrage
 Clonez le projet pour le récupérer :
@@ -45,7 +49,7 @@ Installez Cypress en global :
 npm i -g cypress
 ```
 
-Ou ouvrez-le directement :
+Ou ouvrez-le directement à la racine du projet :
 ```
 npx cypress open
 ```
@@ -104,3 +108,7 @@ Ouvrez ce fichier dans un navigateur pour consulter les résultats détaillés.
 
 Les résultats des tests, rapports d’incidents et captures d’écran sont disponibles dans le dossier Bilan de campagne de test.  
 Ce README sera mis à jour à mesure que la couverture de test évolue.
+
+
+
+npm run test
