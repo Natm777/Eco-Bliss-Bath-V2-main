@@ -1,0 +1,124 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-07-18T10:42:02.689Z",
+    "end": "2025-07-18T10:42:08.006Z",
+    "duration": 5317,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c5f63758-2dd4-4554-ab3e-c11966389bee",
+      "title": "",
+      "fullFile": "cypress\\e2e\\login.cy.js",
+      "file": "cypress\\e2e\\login.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "dd98c012-0f79-45d3-a9fb-7b1913965148",
+          "title": "Connexion utilisateur",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "devrait se connecter avec succès",
+              "fullTitle": "Connexion utilisateur devrait se connecter avec succès",
+              "timedOut": null,
+              "duration": 3806,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept('POST', '**/login').as('loginRequest');\ncy.get('[data-cy=\"login-input-username\"]').type('test2@test.fr');\ncy.get('[data-cy=\"login-input-password\"]').type('testtest');\ncy.get('[data-cy=\"login-submit\"]').click();\n// Attendre la réponse de l’API de login avant de vérifier le DOM\ncy.wait('@loginRequest');\n// Vérifie que la redirection a bien été faite et que l'utilisateur est connecté\ncy.get('[data-cy=\"nav-link-cart\"]').should('be.visible');",
+              "err": {},
+              "uuid": "67c92925-491c-4e58-88bb-59e36c8092db",
+              "parentUUID": "dd98c012-0f79-45d3-a9fb-7b1913965148",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "devrait afficher un message d'erreur si mauvais identifiants",
+              "fullTitle": "Connexion utilisateur devrait afficher un message d'erreur si mauvais identifiants",
+              "timedOut": null,
+              "duration": 1390,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.intercept('POST', '**/login').as('loginRequest');\ncy.get('[data-cy=\"login-input-username\"]').type('test2@test.fr');\ncy.get('[data-cy=\"login-input-password\"]').type('wrongpassword');\ncy.get('[data-cy=\"login-submit\"]').click();\ncy.wait('@loginRequest');\ncy.get('[data-cy=\"login-errors\"]').should('contain', 'Identifiants incorrects');",
+              "err": {},
+              "uuid": "0cf010f4-1cdd-4331-91ef-e1e4c02ea408",
+              "parentUUID": "dd98c012-0f79-45d3-a9fb-7b1913965148",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "67c92925-491c-4e58-88bb-59e36c8092db",
+            "0cf010f4-1cdd-4331-91ef-e1e4c02ea408"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5196,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "mochawesome-report",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

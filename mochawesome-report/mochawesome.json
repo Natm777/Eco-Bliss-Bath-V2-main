@@ -1,0 +1,163 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-07-18T10:41:07.998Z",
+    "end": "2025-07-18T10:41:10.924Z",
+    "duration": 2926,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c388db9f-acdf-4231-a034-cb145203db8d",
+      "title": "",
+      "fullFile": "cypress\\e2e\\apiChangeQuantity.cy.js",
+      "file": "cypress\\e2e\\apiChangeQuantity.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ee270855-413c-457e-b629-5eda1aa72dcb",
+          "title": "PUT /orders/add - Modifier la quantité d'un produit au pannier",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Devrait ajouter un produit au panier avec success",
+              "fullTitle": "PUT /orders/add - Modifier la quantité d'un produit au pannier Devrait ajouter un produit au panier avec success",
+              "timedOut": null,
+              "duration": 1690,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: \"PUT\",\n  url: apiUrl + \"/orders/add\",\n  headers: {\n    Authorization: \"Bearer \" + token\n  },\n  body: {\n    product: 9,\n    quantity: 1\n  }\n}).then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body).to.have.property(\"orderLines\").and.to.be.an(\"array\");\n  orderLineId = response.body.orderLines[0].id;\n  expect(orderLineId).to.be.a(\"number\");\n});",
+              "err": {},
+              "uuid": "2b4e065b-8014-4a4e-8857-3765c0dffed1",
+              "parentUUID": "ee270855-413c-457e-b629-5eda1aa72dcb",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Devrait modifier la quantité d produit au panier avec success",
+              "fullTitle": "PUT /orders/add - Modifier la quantité d'un produit au pannier Devrait modifier la quantité d produit au panier avec success",
+              "timedOut": null,
+              "duration": 383,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: \"PUT\",\n  url: `${apiUrl}/orders/${orderLineId}/change-quantity`,\n  headers: {\n    Authorization: \"Bearer \" + token\n  },\n  body: {\n    quantity: 2\n  }\n}).then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body).to.have.property(\"orderLines\").and.to.be.an(\"array\");\n  response.body.orderLines.forEach(line => {\n    // Vérifie que chaque ligne de commande a une propriété \"quantity\"\n    expect(line).to.have.property(\"quantity\").and.to.be.a(\"number\").and.to.be.greaterThan(0);\n  });\n});",
+              "err": {},
+              "uuid": "4cc99d35-c11c-4097-8054-a74f87044d48",
+              "parentUUID": "ee270855-413c-457e-b629-5eda1aa72dcb",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2b4e065b-8014-4a4e-8857-3765c0dffed1",
+            "4cc99d35-c11c-4097-8054-a74f87044d48"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2073,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "1509782d-72e6-415c-9551-b0a0db6c62c6",
+          "title": "PUT /orders/${orderLineId}/change-quantity ajouter un produit inexistante au pannier",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Devrait envoyer un 404 car produit non trouvé",
+              "fullTitle": "PUT /orders/${orderLineId}/change-quantity ajouter un produit inexistante au pannier Devrait envoyer un 404 car produit non trouvé",
+              "timedOut": null,
+              "duration": 785,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const fakeOrderLineId = 999999;\ncy.request({\n  method: \"PUT\",\n  url: `${apiUrl}/orders/${fakeOrderLineId}/change-quantity`,\n  headers: {\n    Authorization: \"Bearer \" + token,\n    Accept: \"application/json\"\n  },\n  body: {\n    quantity: 2\n  },\n  failOnStatusCode: false\n}).then(response => {\n  expect(response.status).to.eq(404);\n  if (typeof response.body === \"string\") {\n    expect(response.body).to.include(\"Produit non trouvé\");\n  }\n});",
+              "err": {},
+              "uuid": "c5bf8be0-f6a2-4bf8-93d9-30a44761ccc5",
+              "parentUUID": "1509782d-72e6-415c-9551-b0a0db6c62c6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c5bf8be0-f6a2-4bf8-93d9-30a44761ccc5"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 785,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "mochawesome-report",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

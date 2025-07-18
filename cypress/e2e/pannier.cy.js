@@ -79,7 +79,7 @@ describe("Ajout au panier et vérification du stock", () => {
 
     cy.get('[data-cy="detail-product-quantity"]').clear().type("1");
     cy.get('[data-cy="detail-product-add"]').click();
-    cy.wait("@addToCart", { timeout: 8000 });
+    cy.wait("@addToCart"); //ESAYEER SANS TIMEOUT!!!!!!
 
     // Vérification active : s'assurer qu'on RESTE sur la page produit
     cy.get('[data-cy="detail-product-name"]', { timeout: 5000 }).should(
