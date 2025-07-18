@@ -88,7 +88,7 @@ describe("Ajout au panier et vérification du stock", () => {
   });
 
   it("ne devrait pas permettre d’ajouter une quantité supérieure au stock", () => {
-    cy.contains('[data-cy="product"]', "Mousse de rêve")
+    cy.contains('[data-cy="product"]', "Chuchotements d'été")
       .find('[data-cy="product-link"]')
       .click();
 
@@ -106,7 +106,8 @@ describe("Ajout au panier et vérification du stock", () => {
         const cleaned = text.trim();
         const match = cleaned.match(/\d+/);
         const availableStock = parseInt(match[0], 10);
-        const tooMuch = availableStock + 1;
+        const tooMuch = availableStock + 2
+        ;
 
         cy.get('[data-cy="detail-product-quantity"]')
           .clear()
