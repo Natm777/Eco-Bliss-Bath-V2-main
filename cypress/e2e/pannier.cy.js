@@ -106,7 +106,7 @@ describe("Ajout au panier et vérification du stock", () => {
         const cleaned = text.trim();
         const match = cleaned.match(/\d+/);
         const availableStock = parseInt(match[0], 10);
-        const tooMuch = availableStock + 2;
+        const tooMuch = availableStock + 3;
         cy.get('[data-cy="detail-product-quantity"]')
           .clear()
           .type(tooMuch.toString());

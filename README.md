@@ -61,7 +61,7 @@ npm install --save-dev cypress
 ## Exécution des tests Cypress
 
 ### Mode graphique (GUI)
-
+Assurez-vous de bien que le front soit bien lancé avant d'executer la commande
 ```
 npx cypress open
 ```
