@@ -6,9 +6,9 @@ L’objectif principal est d’automatiser les tests critiques du **panier** et 
 ## Prérequis
 Pour démarrer cet applicatif web vous devez avoir les outils suivants:
 
--Docker
--NodeJs
--Angular CLI global 
+- Docker
+- NodeJs
+- Angular CLI global 
 
 ## Pour installer Angular 
 
