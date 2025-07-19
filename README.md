@@ -58,7 +58,7 @@ npm install --save-dev cypress
 
 ---
 
-## ▶️ Exécution des tests Cypress
+## Exécution des tests Cypress
 
 ### Mode graphique (GUI)
 
@@ -68,7 +68,12 @@ npx cypress open
 Lancez manuellement les fichiers de test depuis l’interface (ex. `connexion.cy.js`, `panier.cy.js`, etc.).
 
 ### Mode terminal 
-
+```
+Assurez-vous de lancer le front end avec la commande
+```
+npm run start
+```
+Ensuite faites
 ```
 npx cypress run
 ```
