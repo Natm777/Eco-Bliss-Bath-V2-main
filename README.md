@@ -58,7 +58,7 @@ npm install --save-dev cypress
 
 ---
 
-## ▶️ Exécution des tests Cypress
+## Exécution des tests Cypress
 
 ### Mode graphique (GUI)
 
