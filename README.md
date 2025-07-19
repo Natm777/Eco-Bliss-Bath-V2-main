@@ -1,4 +1,4 @@
-**Projet Eco-Bliss-Bath**
+# Projet Eco-Bliss-Bath
 
 Ce dépôt contient la campagne de tests fonctionnels réalisée avec **Cypress** pour l’application e-commerce *Eco Bliss Bath*.  
 L’objectif principal est d’automatiser les tests critiques du **panier** et de la **connexion**, ainsi que des **appels API** et des **smoke tests**.
