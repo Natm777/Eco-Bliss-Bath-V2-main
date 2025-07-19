@@ -54,13 +54,14 @@ context(
         expect(response.body)
           .to.have.property("orderLines")
           .and.to.be.an("array");
-        response.body.orderLines.forEach((line) => {
-          // Vérifie que chaque ligne de commande a une propriété "quantity"
-          expect(line)
-            .to.have.property("quantity")
-            .and.to.be.a("number")
-            .and.to.be.greaterThan(0);
-        });
+
+         const updatedLine = response.body.orderLines.find(
+          (line) => line.id === orderLineId
+         );
+        expect(updatedLine)
+          .to.have.property("quantity")
+          .and.to.be.a("number")
+          .and.to.be.greaterThan(1); // 
       });
     });
   }

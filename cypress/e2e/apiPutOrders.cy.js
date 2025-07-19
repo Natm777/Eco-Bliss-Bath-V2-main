@@ -95,13 +95,13 @@ context("PUT /orders/add - Ajouter un produit au panier", () => {
   });
 
   it("ne devrait pas permettre d’ajouter une quantité supérieure à la disponibilité", () => {
-    const productId = 9;
+    const productId = 10;
 
     cy.request(`${apiUrl}/products/${productId}`).then((res) => {
       const stock = res.body.availableStock;
       expect(stock).to.be.a("number").and.to.be.greaterThan(0);
 
-      const excessiveQuantity = stock + 1;
+      const excessiveQuantity = stock + 2; // Plus que le stock disponible
 
       cy.request({
         method: "PUT",

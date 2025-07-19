@@ -23,7 +23,7 @@ context("POST /Orders avec commande", () => {
         Authorization: "Bearer " + token,
       },
       body: {
-        product: 10, // ou un produit connu en stock
+        product: 6, // ou un produit connu en stock
         quantity: 1,
       },
     }).then((addResponse) => {

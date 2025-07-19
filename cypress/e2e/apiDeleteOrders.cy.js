@@ -22,7 +22,7 @@ context("DELETE /orders/{id}/delete - supprimer un produit du panier", () => {
         Authorization: "Bearer " + token,
       },
       body: {
-        product: 7,
+        product: 6,
         quantity: 1,
       },
     }).then((response) => {
