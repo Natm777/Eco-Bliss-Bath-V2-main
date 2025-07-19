@@ -32,12 +32,16 @@ docker compose up -d
 
 ### 3. Démarrer le frontend
 
-```
 Aller sur:
+```
 cd frontend
+```
 Et ensuite entrer:
+```
 npm install
+```
 et
+```
 npm run start
 ```
 
@@ -74,7 +78,7 @@ Cela exécute tous les tests automatiquement en ligne de commande.
 
 ## Génération du rapport de tests (Mochawesome)
 
-### 1. Installer le reporter (si ce n’est pas déjà fait)
+### 1. Installer le reporter 
 
 ```
 npm install --save-dev mochawesome
@@ -92,7 +96,7 @@ npm run test
 Le rapport HTML est généré ici :
 
 ```
-cypress/reports/mochawesome-report/mochawesome.html
+Eco-Bliss-Bath-V2-main\mochawesome-report
 ```
 Les Captures d’écran automatiques sont disponibles en (`cypress/screenshots`)
 
