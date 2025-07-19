@@ -52,12 +52,6 @@ Depuis la racine du projet :
 ```
 npm install --save-dev cypress
 ```
-
-> Si vous avez besoin d’une installation globale :
-> ```
-> npm install -g cypress
-> ```
-
 ---
 
 ## Exécution des tests Cypress
