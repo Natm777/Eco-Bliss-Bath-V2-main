@@ -30,7 +30,7 @@ cd Eco-Bliss-Bath-V2-main
 docker compose up -d
 ```
 
-## 🔍 Documentation de l’API (Swagger)
+### Documentation de l’API (Swagger)
 
 Pour consulter les endpoints de l’API, accédez à l’interface Swagger via :
 ```
