@@ -9,7 +9,7 @@ describe("Vérifier présence bouton 'Ajouter au panier' sur plusieurs fiches pr
     cy.get('[data-cy="login-input-password"]').type("testtest"); // Saisie du mot de passe.
     cy.get('[data-cy="login-submit"]').click(); // Soumission du formulaire de connexion.
     cy.get('[data-cy="nav-link-cart"]').should("be.visible"); // Vérifie que le lien vers le panier est visible.
-    cy.visit("/#/"); // Retour à la page d'accueil.
+    cy.url().should("include", "/#/"); // Vérifie que l'URL correspond à la page d'accueil.
     cy.contains("button", "Voir les produits").click(); // Clique sur le bouton pour afficher les produits.
     cy.url().should("include", "/#/products"); // Vérifie que l'URL correspond à la page des produits.
   });
