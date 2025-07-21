@@ -71,7 +71,7 @@ context("PUT /orders/add - Ajouter un produit au panier", () => {
         .to.have.property("orderLines")
         .and.to.be.an("array");
 
-      // Vérifie que chaque ligne de commande a une quantité supérieure à 0.
+      // Vérifie que chaque orderline a une quantité supérieure à 0.
       response.body.orderLines.forEach((line) => {
         expect(line)
           .to.have.property("quantity")
