@@ -1,6 +1,4 @@
-// Ce fichier contient des tests end-to-end Cypress pour vérifier le fonctionnement de la connexion utilisateur.
 
-// Bloc principal de tests pour la fonctionnalité de connexion.
 describe("Connexion utilisateur", () => {
   // Avant chaque test, on visite la page de connexion et on vérifie la présence des champs nécessaires.
   beforeEach(() => {
@@ -34,9 +32,6 @@ describe("Connexion utilisateur", () => {
 
     cy.wait("@loginRequest"); // Attend la réponse de l'API.
 
-    cy.get('[data-cy="login-errors"]').should(
-      "contain",
-      "Identifiants incorrects"
-    ); // Vérifie que le message d'erreur s'affiche.
+    cy.get('[data-cy="login-errors"]').should("contain","Identifiants incorrects"); // Vérifie que le message d'erreur s'affiche.
   });
 });

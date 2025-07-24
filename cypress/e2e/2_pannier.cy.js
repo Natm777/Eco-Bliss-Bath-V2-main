@@ -1,6 +1,4 @@
-// Ce fichier contient des tests end-to-end Cypress pour vérifier le comportement du panier et la gestion du stock lors de l’ajout de produits.
 
-// Définition du bloc de tests principal pour l’ajout au panier et la vérification du stock.
 describe("Ajout au panier et vérification du stock", () => {
   // Variable pour stocker le stock initial du produit testé.
   let initialStock;

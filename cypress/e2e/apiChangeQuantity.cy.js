@@ -1,4 +1,3 @@
-// Ce fichier contient des tests end-to-end Cypress pour l'API de modification de quantité d'un produit dans le panier.
 
 // Récupération de l'URL de l'API depuis les variables d'environnement Cypress.
 const apiUrl = Cypress.env("apiUrl");

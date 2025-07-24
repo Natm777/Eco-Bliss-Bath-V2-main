@@ -1,6 +1,4 @@
-// Ce test vérifie la présence du bouton "Ajouter au panier" sur plusieurs fiches produit.
 
-// Bloc principal de tests pour la vérification du bouton sur les fiches produit.
 describe("Vérifier présence bouton 'Ajouter au panier' sur plusieurs fiches produit", () => {
   // Avant tous les tests, on effectue la connexion et on navigue vers la liste des produits.
   before(() => {

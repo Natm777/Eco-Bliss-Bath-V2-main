@@ -1,6 +1,4 @@
-// Ce fichier contient un test end-to-end Cypress pour vérifier la présence d'une faille XSS (Cross-Site Scripting) dans le formulaire d'avis.
 
-// Définition du bloc de test principal pour la vérification XSS.
 describe("Vérifier faille XSS", () => {
   // Avant tous les tests, on effectue la connexion et on navigue vers la page des avis.
   before(() => {
