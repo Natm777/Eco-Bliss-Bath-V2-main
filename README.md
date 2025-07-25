@@ -8,12 +8,6 @@ Pour démarrer cet applicatif web vous devez avoir les outils suivants:
 
 - Docker
 - NodeJs
-- Angular CLI global 
-
-## Pour installer Angular 
-
-npm install -g @angular/cli
-
 
 ## Installation et démarrage
 
@@ -92,23 +86,22 @@ npm install --save-dev mochawesome
 ```
 
 ### 2. Lancer les tests avec génération automatique du rapport
-
+Assurez-vous que le front soit bien lancé avant d'executer la commande!
 ```
-npm run test
+npx cypress run --reporter mochawesome --reporter-options "reportDir=cypress/reports/mochawesome,overwrite=false,html=true,json=true"
 ```
-> Le script `npm run test` est déjà configuré dans le `package.json` pour utiliser Mochawesome comme reporter.
 
 ### 3. Visualiser le rapport
 
 Le rapport HTML est généré ici :
 
 ```
-Eco-Bliss-Bath-V2-main\mochawesome-report
+Eco-Bliss-Bath-V2-main\cypress\reports\mochawesome
 ```
 Les Captures d’écran automatiques sont disponibles en (`cypress/screenshots`)
 
 ## Suivi
 
 Les résultats des tests, rapports d’incidents et captures d’écran sont disponibles dans le dossier Bilan de campagne de test.  
-Ce README sera mis à jour à mesure que la couverture de test évolue.
+Ce README sera mis à jour à mesure que la couverture des test évolue.
 
